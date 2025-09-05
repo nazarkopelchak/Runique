@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.nazarkopelchak.run.network"
+    namespace = "com.nazarkopelchak.core.presentation.designsystem"
     compileSdk = 36
 
     defaultConfig {
@@ -33,4 +33,12 @@ android {
 }
 
 dependencies {
+    implementation(platform(libs.androidx.compose.bom))
+
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.ui)
+    implementation(libs.androidx.ui.graphics)
+    implementation(libs.androidx.ui.tooling.preview)
+    debugImplementation(libs.androidx.ui.tooling)
+    api(libs.androidx.material3)
 }
