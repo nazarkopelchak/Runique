@@ -1,5 +1,6 @@
 package com.nazarkopelchak.runique
 
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavGraphBuilder
@@ -8,19 +9,22 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navigation
 import com.nazarkopelchak.auth.presentation.intro.IntroScreenRoot
+import com.nazarkopelchak.auth.presentation.login.LoginScreenRoot
 import com.nazarkopelchak.auth.presentation.register.RegisterScreenRoot
 
 @Composable
 fun NavigationRoot(
     navController: NavHostController,
+    isLoggedIn: Boolean,
     modifier: Modifier = Modifier
 ) {
     NavHost(
         navController = navController,
-        startDestination = "auth",
+        startDestination = if (isLoggedIn) "run" else "auth",
         modifier = modifier
     ) {
         authGraph(navController)
+        runGraph(navController)
     }
 }
 
@@ -60,6 +64,41 @@ private fun NavGraphBuilder.authGraph(
                     navController.navigate("login")
                 }
             )
+        }
+        composable(
+            route = "login"
+        ) {
+            LoginScreenRoot(
+                onLoginSuccess = {
+                    navController.navigate("run") {
+                        popUpTo("auth") {
+                            inclusive = true
+                        }
+                    }
+                },
+                onSignUpClick = {
+                    navController.navigate("register") {
+                        popUpTo("login") {
+                            inclusive = true
+                            saveState = true
+                        }
+                        restoreState = true
+                    }
+                }
+            )
+        }
+    }
+}
+
+private fun NavGraphBuilder.runGraph(navController: NavHostController) {
+    navigation(
+        startDestination = "run_overview",
+        route = "run"
+    ) {
+        composable(
+            route = "run_overview"
+        ) {
+            Text(text = "run_overview")
         }
     }
 }
