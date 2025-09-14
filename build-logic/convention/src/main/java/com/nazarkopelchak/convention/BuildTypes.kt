@@ -49,7 +49,7 @@ internal fun Project.configureBuildTypes(
 
 private fun BuildType.configureDebugBuildType(apiKey: String) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")    // This syntax is necessary for buildConfigField
-    buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")    //TODO Replace the base url
+    buildConfigField("String", "BASE_URL", "\"http://192.168.86.112:8080\"")    //TODO Replace the base url
 }
 
 private fun BuildType.configureReleaseBuildType(
@@ -57,7 +57,7 @@ private fun BuildType.configureReleaseBuildType(
     commonExtension: CommonExtension<*, *, *, *, *, *>
 ) {
     buildConfigField("String", "API_KEY", "\"$apiKey\"")    // This syntax is necessary for buildConfigField
-    buildConfigField("String", "BASE_URL", "\"https://runique.pl-coding.com:8080\"")    //TODO Replace the base url
+    buildConfigField("String", "BASE_URL", "\"http://192.168.86.112:8080\"")    //TODO Replace the base url
 
     isMinifyEnabled = true
     proguardFiles(
