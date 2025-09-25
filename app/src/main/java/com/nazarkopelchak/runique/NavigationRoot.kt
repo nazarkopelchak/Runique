@@ -1,6 +1,5 @@
 package com.nazarkopelchak.runique
 
-import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -21,6 +20,7 @@ import com.nazarkopelchak.run.presentation.run_overview.RunOverviewScreenRoot
 fun NavigationRoot(
     navController: NavHostController,
     isLoggedIn: Boolean,
+    onAnalyticsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     NavHost(
@@ -29,7 +29,7 @@ fun NavigationRoot(
         modifier = modifier
     ) {
         authGraph(navController)
-        runGraph(navController)
+        runGraph(navController, onAnalyticsClick)
     }
 }
 
@@ -95,7 +95,10 @@ private fun NavGraphBuilder.authGraph(
     }
 }
 
-private fun NavGraphBuilder.runGraph(navController: NavHostController) {
+private fun NavGraphBuilder.runGraph(
+    navController: NavHostController,
+    onAnalyticsClick: () -> Unit
+) {
     navigation(
         startDestination = "run_overview",
         route = "run"
@@ -113,7 +116,8 @@ private fun NavGraphBuilder.runGraph(navController: NavHostController) {
                             inclusive = true
                         }
                     }
-                }
+                },
+                onAnalyticsClick = onAnalyticsClick
             )
         }
         composable(
