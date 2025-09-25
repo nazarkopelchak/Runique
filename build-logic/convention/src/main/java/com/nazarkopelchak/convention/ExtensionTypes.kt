@@ -2,5 +2,6 @@ package com.nazarkopelchak.convention
 
 enum class ExtensionTypes {
     APPLICATION,
-    LIBRARY
+    LIBRARY,
+    DYNAMIC_FEATURE
 }
