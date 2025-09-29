@@ -128,7 +128,7 @@ class ActiveRunViewModel(
                 )
             }
             is ActiveRunAction.OnRunProcessed -> {
-
+                finishRun(action.mapPictureBytes)
             }
         }
     }
